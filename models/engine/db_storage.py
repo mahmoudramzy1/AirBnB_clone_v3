@@ -78,7 +78,7 @@ class DBStorage:
     def get(self, cls, id):
         """get the object with id given"""
         obj_dict = self.all(cls)
-        matchkey = cls + '.' + id
+        matchkey = cls.__name__ + '.' + id
         for key in obj_dict:
             if key == matchkey:
                 return obj_dict[key]
