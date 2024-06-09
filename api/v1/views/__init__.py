@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from flask import Blueprint
 """make blueprint of app_view"""
 
