@@ -63,11 +63,10 @@ def update_amenity(amenity_id):
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
-    amenity_data = request.get_json(force=True, silent=True)
+    amenity_data = request.get_json()
     if type(amenity_data) is not dict:
         abort(400, "Not a JSON")
-    if request.content_type != 'application/json':
-        abort(415, description="Unsupported Media Type")
+   
     for key, value in amenity_data.items():
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(amenity, key, value)
