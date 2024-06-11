@@ -43,24 +43,14 @@ def del_city(city_id):
 @app_views.route('/states/<state_id>/cities', methods=['POST'])
 def add_city(state_id):
     """create city"""
-    if request.content_type != 'application/json':
-        abort(404, 'Not a JSON')
-
     state = storage.get(State, state_id)
-    if not state:
+    if state is None:
         abort(404)
-
-    if request.get_json():
-        abort(404, 'Not a JSON')
-
-    data = request.get_json()
-
-    if 'name' not in data:
-        return abort(404, 'Missing name')
-
-    data['state_id'] = state_id
-
-    city = City(**data)
+    if not request.json:
+        abort(400, 'Not a JSON')
+    if 'name' not in request.json:
+        abort(400, 'Missing name')
+    city = City(state_id=state_id, **request.get_json())
     city.save()
     return jsonify(city.to_dict()), 201
 
@@ -75,7 +65,7 @@ def edit_city(city_id):
     if not city:
         abort(404)
 
-    if request.get_json():
+    if not request.json:
         abort(404, 'Not a JSON')
 
     data = request.get_json()
