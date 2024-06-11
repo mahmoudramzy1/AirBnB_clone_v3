@@ -15,5 +15,3 @@ if __name__ == "__main__":
     """
     r = requests.put("http://0.0.0.0:5000/api/v1/amenities/{}".format(amenity_id), data={ 'name': "NewAmenityName" }, headers={ 'Content-Type': "application/x-www-form-urlencoded" })
     print(r.status_code)
-    print(r.json)
-    print(r_j)
