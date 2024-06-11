@@ -21,7 +21,7 @@ def get_cities_by_state(state_id):
 @app_views.route('/cities/<city_id>', strict_slashes=False, methods=['GET'])
 def get_city(city_id):
     """retrieve city"""
-    city = storage.get(city_id)
+    city = storage.get(City, city_id)
     if city:
         return jsonify(city.to_dict())
     else:
@@ -31,7 +31,7 @@ def get_city(city_id):
 @app_views.route('/cities/<city_id>', methods=['DELETE'], strict_slashes=False)
 def del_city(city_id):
     """delete city"""
-    city = storage.get(city_id)
+    city = storage.get(City, city_id)
     if city:
         storage.delete(city)
         storage.save()
