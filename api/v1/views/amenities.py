@@ -2,7 +2,7 @@
 """A view for Amenity objects that handles all default RESTFul API actions"""
 
 
-from flask import Flask, jsonify, abort, request
+from flask import Flask, jsonify, abort, request, make_response
 from models import storage
 from models.amenity import Amenity
 from api.v1.views import app_views
@@ -71,4 +71,4 @@ def update_amenity(amenity_id):
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(amenity, key, value)
     amenity.save()
-    return jsonify(amenity.to_dict()), 200
+    return make_response(jsonify(amenity.to_dict()), 200)
