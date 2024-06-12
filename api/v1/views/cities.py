@@ -66,7 +66,7 @@ def edit_city(city_id):
         abort(404)
 
     if not request.json:
-        abort(404, 'Not a JSON')
+        abort(400, 'Not a JSON')
 
     data = request.get_json()
     ignore_keys = ['id', 'state_id', 'created_at', 'updated_at']
