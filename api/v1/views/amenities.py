@@ -55,7 +55,8 @@ def create_amenity():
     return jsonify(amenity.to_dict()), 201
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', methods=['PUT'],
+                 strict_slashes=False)
 def update_amenity(amenity_id):
     """
     Updates a Amenity object
@@ -68,7 +69,7 @@ def update_amenity(amenity_id):
     amenity_data = request.get_json()
     if not request.get_json():
         abort(400, "Not a JSON")
-   
+
     for key, value in amenity_data.items():
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(amenity, key, value)
